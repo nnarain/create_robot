@@ -81,6 +81,24 @@
     </gazebo>
   </xacro:macro>
 
+  <xacro:macro name="sim_create_bump_sensor">
+    <gazebo reference="base_link">
+      <sensor name="bumper" type="contact">
+        <always_on>true</always_on>
+        <update_rate>20.0</update_rate>
+        <maxContacts>10</maxContacts>
+        <pose>0 0 0 0 0 0</pose>
+        <visualize>false</visualize>
+        <contact>
+          <collision>base_footprint_fixed_joint_lump__base_link_collision_1</collision>
+        </contact>
+        <plugin name="gazebo_ros_bumper_controller" filename="libgazebo_ros_bumper.so">
+          <bumperTopicName>/sim/bumper</bumperTopicName>
+        </plugin>
+      </sensor>
+    </gazebo>
+  </xacro:macro>
+
   <xacro:macro name="sim_create_wall_sensor">
     <gazebo reference="wall_sensor_link">
       <sensor type="ray" name="wall_sensor">
