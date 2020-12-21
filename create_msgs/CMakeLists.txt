@@ -9,6 +9,7 @@ find_package(catkin REQUIRED COMPONENTS
 add_message_files(
   FILES
   Bumper.msg
+  Cliff.msg
   ChargingState.msg
   DefineSong.msg
   Mode.msg

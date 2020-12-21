@@ -86,7 +86,6 @@
       <sensor name="bumper" type="contact">
         <always_on>true</always_on>
         <update_rate>20.0</update_rate>
-        <maxContacts>10</maxContacts>
         <pose>0 0 0 0 0 0</pose>
         <visualize>false</visualize>
         <contact>
@@ -147,6 +146,10 @@
             <resolution>0.1</resolution>
           </range>
         </ray>
+        <plugin name="gazebo_left_cliff_sensor" filename="libcreate_cliff_plugin.so">
+          <topicName>/sim/left_cliff</topicName>
+          <cliffRange>0.05</cliffRange>
+        </plugin>
       </sensor>
     </gazebo>
 
@@ -171,6 +174,10 @@
             <resolution>0.1</resolution>
           </range>
         </ray>
+        <plugin name="gazebo_right_cliff_sensor" filename="libcreate_cliff_plugin.so">
+          <topicName>/sim/right_cliff</topicName>
+          <cliffRange>0.05</cliffRange>
+        </plugin>
       </sensor>
     </gazebo>
 
@@ -195,6 +202,10 @@
             <resolution>0.1</resolution>
           </range>
         </ray>
+        <plugin name="gazebo_leftfront_cliff_sensor" filename="libcreate_cliff_plugin.so">
+          <topicName>/sim/leftfront_cliff</topicName>
+          <cliffRange>0.05</cliffRange>
+        </plugin>
       </sensor>
     </gazebo>
 
@@ -219,6 +230,10 @@
             <resolution>0.1</resolution>
           </range>
         </ray>
+        <plugin name="gazebo_right_cliff_sensor" filename="libcreate_cliff_plugin.so">
+          <topicName>/sim/rightfront_cliff</topicName>
+          <cliffRange>0.05</cliffRange>
+        </plugin>
       </sensor>
     </gazebo>
   </xacro:macro>
