@@ -146,7 +146,7 @@
             <resolution>0.1</resolution>
           </range>
         </ray>
-        <plugin name="gazebo_left_cliff_sensor" filename="libcreate_cliff_plugin.so">
+        <plugin name="gazebo_left_cliff_sensor" filename="libcreate_cliff_sensor_plugin.so">
           <topicName>/sim/left_cliff</topicName>
           <cliffRange>0.05</cliffRange>
         </plugin>
@@ -174,7 +174,7 @@
             <resolution>0.1</resolution>
           </range>
         </ray>
-        <plugin name="gazebo_right_cliff_sensor" filename="libcreate_cliff_plugin.so">
+        <plugin name="gazebo_right_cliff_sensor" filename="libcreate_cliff_sensor_plugin.so">
           <topicName>/sim/right_cliff</topicName>
           <cliffRange>0.05</cliffRange>
         </plugin>
@@ -202,7 +202,7 @@
             <resolution>0.1</resolution>
           </range>
         </ray>
-        <plugin name="gazebo_leftfront_cliff_sensor" filename="libcreate_cliff_plugin.so">
+        <plugin name="gazebo_leftfront_cliff_sensor" filename="libcreate_cliff_sensor_plugin.so">
           <topicName>/sim/leftfront_cliff</topicName>
           <cliffRange>0.05</cliffRange>
         </plugin>
@@ -230,7 +230,7 @@
             <resolution>0.1</resolution>
           </range>
         </ray>
-        <plugin name="gazebo_right_cliff_sensor" filename="libcreate_cliff_plugin.so">
+        <plugin name="gazebo_right_cliff_sensor" filename="libcreate_cliff_sensor_plugin.so">
           <topicName>/sim/rightfront_cliff</topicName>
           <cliffRange>0.05</cliffRange>
         </plugin>
