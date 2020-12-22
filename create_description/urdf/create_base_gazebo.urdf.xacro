@@ -30,6 +30,17 @@
       </plugin>
     </gazebo>
 
+    <gazebo>
+      <plugin name="create_cliff_model_plugin" filename="libcreate_cliff_model_plugin.so">
+        <updateRate>10.0</updateRate>
+      </plugin>
+    </gazebo>
+    <gazebo>
+      <plugin name="create_bumper_model_plugin" filename="libcreate_bumper_model_plugin.so">
+        <updateRate>10.0</updateRate>
+      </plugin>
+    </gazebo>
+
     <gazebo reference="left_wheel_link">
       <mu1>1.0</mu1>
       <mu2>1.0</mu2>
@@ -81,6 +92,23 @@
     </gazebo>
   </xacro:macro>
 
+  <xacro:macro name="sim_create_bump_sensor">
+    <gazebo reference="base_link">
+      <sensor name="bumper" type="contact">
+        <always_on>true</always_on>
+        <update_rate>20.0</update_rate>
+        <pose>0 0 0 0 0 0</pose>
+        <visualize>false</visualize>
+        <contact>
+          <collision>base_footprint_fixed_joint_lump__base_link_collision_1</collision>
+        </contact>
+        <plugin name="gazebo_ros_bumper_controller" filename="libgazebo_ros_bumper.so">
+          <bumperTopicName>/sim/bumper</bumperTopicName>
+        </plugin>
+      </sensor>
+    </gazebo>
+  </xacro:macro>
+
   <xacro:macro name="sim_create_wall_sensor">
     <gazebo reference="wall_sensor_link">
       <sensor type="ray" name="wall_sensor">
@@ -129,6 +157,10 @@
             <resolution>0.1</resolution>
           </range>
         </ray>
+        <plugin name="gazebo_left_cliff_sensor" filename="libcreate_cliff_sensor_plugin.so">
+          <topicName>/sim/left_cliff</topicName>
+          <cliffRange>0.05</cliffRange>
+        </plugin>
       </sensor>
     </gazebo>
 
@@ -153,6 +185,10 @@
             <resolution>0.1</resolution>
           </range>
         </ray>
+        <plugin name="gazebo_right_cliff_sensor" filename="libcreate_cliff_sensor_plugin.so">
+          <topicName>/sim/right_cliff</topicName>
+          <cliffRange>0.05</cliffRange>
+        </plugin>
       </sensor>
     </gazebo>
 
@@ -177,6 +213,10 @@
             <resolution>0.1</resolution>
           </range>
         </ray>
+        <plugin name="gazebo_leftfront_cliff_sensor" filename="libcreate_cliff_sensor_plugin.so">
+          <topicName>/sim/leftfront_cliff</topicName>
+          <cliffRange>0.05</cliffRange>
+        </plugin>
       </sensor>
     </gazebo>
 
@@ -201,6 +241,10 @@
             <resolution>0.1</resolution>
           </range>
         </ray>
+        <plugin name="gazebo_right_cliff_sensor" filename="libcreate_cliff_sensor_plugin.so">
+          <topicName>/sim/rightfront_cliff</topicName>
+          <cliffRange>0.05</cliffRange>
+        </plugin>
       </sensor>
     </gazebo>
   </xacro:macro>

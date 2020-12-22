@@ -229,6 +229,7 @@
 
     <!-- Simulation sensors -->
     <xacro:sim_create_base/>
+    <xacro:sim_create_bump_sensor/>
     <xacro:sim_create_wall_sensor/>
     <xacro:sim_create_cliff_sensors/>
     <xacro:sim_imu/>
