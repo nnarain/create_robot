@@ -35,6 +35,11 @@
         <updateRate>10.0</updateRate>
       </plugin>
     </gazebo>
+    <gazebo>
+      <plugin name="create_bumper_model_plugin" filename="libcreate_bumper_model_plugin.so">
+        <updateRate>10.0</updateRate>
+      </plugin>
+    </gazebo>
 
     <gazebo reference="left_wheel_link">
       <mu1>1.0</mu1>
