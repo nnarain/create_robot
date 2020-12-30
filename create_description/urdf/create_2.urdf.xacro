@@ -6,4 +6,92 @@
   <xacro:create_base wheel_separation="0.235" base_diameter="0.3485">
     <mesh filename="package://create_description/meshes/create_2.dae" />
   </xacro:create_base>
+
+  <!-- Bumper Light Sensors -->
+  <link name="left_light_sensor_link">
+  <inertial>
+    <mass value="0.01" />
+    <origin xyz="0 0 0" />
+    <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001" />
+  </inertial>
+  </link>
+
+  <link name="left_front_light_sensor_link">
+  <inertial>
+    <mass value="0.01" />
+    <origin xyz="0 0 0" />
+    <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001" />
+  </inertial>
+  </link>
+
+  <link name="left_center_light_sensor_link">
+  <inertial>
+    <mass value="0.01" />
+    <origin xyz="0 0 0" />
+    <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001" />
+  </inertial>
+  </link>
+
+  <link name="right_light_sensor_link">
+  <inertial>
+    <mass value="0.01" />
+    <origin xyz="0 0 0" />
+    <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001" />
+  </inertial>
+  </link>
+
+  <link name="right_front_light_sensor_link">
+  <inertial>
+    <mass value="0.01" />
+    <origin xyz="0 0 0" />
+    <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001" />
+  </inertial>
+  </link>
+
+  <link name="right_center_light_sensor_link">
+  <inertial>
+    <mass value="0.01" />
+    <origin xyz="0 0 0" />
+    <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001" />
+  </inertial>
+  </link>
+
+  <joint name="base_left_light_sensor_joint" type="fixed">
+    <origin xyz="0.02469 0.1580 0.042" rpy="0 0 1.4158" />
+    <parent link="base_link" />
+    <child link="left_light_sensor_link" />
+  </joint>
+
+  <joint name="base_left_front_light_sensor_joint" type="fixed">
+    <origin xyz="0.0938 0.12957 0.042" rpy="0 0 0.9438" />
+    <parent link="base_link" />
+    <child link="left_front_light_sensor_link" />
+  </joint>
+
+  <joint name="base_left_center_light_sensor_joint" type="fixed">
+    <origin xyz="0.1425 0.07273 0.042" rpy="0 0 0.4719" />
+    <parent link="base_link" />
+    <child link="left_center_light_sensor_link" />
+  </joint>
+
+  <joint name="base_right_light_sensor_joint" type="fixed">
+    <origin xyz="0.0246 -0.1580 0.042" rpy="0 0 -1.0" />
+    <parent link="base_link" />
+    <child link="right_light_sensor_link" />
+  </joint>
+
+  <joint name="base_right_front_light_sensor_joint" type="fixed">
+    <origin xyz="0.0938 -0.1295 0.042" rpy="0 0 -0.9438" />
+    <parent link="base_link" />
+    <child link="right_front_light_sensor_link" />
+  </joint>
+
+  <joint name="base_right_center_light_sensor_joint" type="fixed">
+    <origin xyz="0.1425 -0.0727 0.042" rpy="0 0 -0.4719" />
+    <parent link="base_link" />
+    <child link="right_center_light_sensor_link" />
+  </joint>
+
+  <!-- Simulation sensors -->
+  <xacro:sim_create_light_sensors/>
 </robot>
