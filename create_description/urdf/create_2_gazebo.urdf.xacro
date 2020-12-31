@@ -30,10 +30,10 @@
   </xacro:macro>
   <xacro:macro name="sim_create_light_sensors">
     <xacro:sim_create_light_sensor prefix="left_light_sensor" topic="/sim/light_left" />
-    <xacro:sim_create_light_sensor prefix="left_front_light_sensor" topic="/sim/light_leftfront" />
-    <xacro:sim_create_light_sensor prefix="left_center_light_sensor" topic="/sim/light_leftcenter" />
+    <xacro:sim_create_light_sensor prefix="left_front_light_sensor" topic="/sim/light_frontleft" />
+    <xacro:sim_create_light_sensor prefix="left_center_light_sensor" topic="/sim/light_centerleft" />
     <xacro:sim_create_light_sensor prefix="right_light_sensor" topic="/sim/light_right" />
-    <xacro:sim_create_light_sensor prefix="right_front_light_sensor" topic="/sim/light_rightfront" />
-    <xacro:sim_create_light_sensor prefix="right_center_light_sensor" topic="/sim/light_rightcenter" />
+    <xacro:sim_create_light_sensor prefix="right_front_light_sensor" topic="/sim/light_frontright" />
+    <xacro:sim_create_light_sensor prefix="right_center_light_sensor" topic="/sim/light_centerright" />
   </xacro:macro>
 </robot>
