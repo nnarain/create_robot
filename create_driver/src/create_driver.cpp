@@ -123,6 +123,7 @@ CreateDriver::CreateDriver()
   undock_sub_ = create_subscription<std_msgs::msg::Empty>("undock", 10, std::bind(&CreateDriver::undockCallback, this, std::placeholders::_1));
   define_song_sub_ = create_subscription<create_msgs::msg::DefineSong>("define_song", 10, std::bind(&CreateDriver::defineSongCallback, this, std::placeholders::_1));
   play_song_sub_ = create_subscription<create_msgs::msg::PlaySong>("play_song", 10, std::bind(&CreateDriver::playSongCallback, this, std::placeholders::_1));
+  cmd_vacuum_sub_ = create_subscription<std_msgs::msg::Float32>("cmd_vacuum", 10, std::bind(&CreateDriver::cmdVacuumCallback, this, std::placeholders::_1));
 
   // Setup publishers
   odom_pub_ = create_publisher<nav_msgs::msg::Odometry>("odom", 30);
@@ -277,6 +278,14 @@ void CreateDriver::playSongCallback(create_msgs::msg::PlaySong::UniquePtr msg)
   if (!robot_->playSong(msg->song))
   {
     RCLCPP_ERROR_STREAM(get_logger(), "[CREATE] Failed to play song " << msg->song);
+  }
+}
+
+void CreateDriver::cmdVacuumCallback(std_msgs::msg::Float32::UniquePtr msg)
+{
+  if (!robot_->setVacuumMotor(msg->data))
+  {
+    RCLCPP_ERROR_STREAM(get_logger(), "[CREATE] Failed to set vacuum power");
   }
 }
 
