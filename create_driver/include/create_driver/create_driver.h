@@ -32,6 +32,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #include "create_msgs/msg/bumper.hpp"
 #include "create_msgs/msg/define_song.hpp"
 #include "create_msgs/msg/play_song.hpp"
+#include "create_msgs/msg/motor_set_point.hpp"
 
 #include "create/create.h"
 
@@ -47,7 +48,6 @@ POSSIBILITY OF SUCH DAMAGE.
 #include <std_msgs/msg/int16.hpp>
 #include <std_msgs/msg/u_int16.hpp>
 #include <std_msgs/msg/u_int8_multi_array.hpp>
-#include <std_msgs/msg/float32.hpp>
 #include <tf2_ros/transform_broadcaster.h>
 
 #include <string>
@@ -76,7 +76,7 @@ private:
   rclcpp::Subscription<std_msgs::msg::Empty>::SharedPtr undock_sub_;
   rclcpp::Subscription<create_msgs::msg::DefineSong>::SharedPtr define_song_sub_;
   rclcpp::Subscription<create_msgs::msg::PlaySong>::SharedPtr play_song_sub_;
-  rclcpp::Subscription<std_msgs::msg::Float32>::SharedPtr cmd_vacuum_sub_;
+  rclcpp::Subscription<create_msgs::msg::MotorSetPoint>::SharedPtr cmd_vacuum_sub_;
 
   rclcpp::Publisher<nav_msgs::msg::Odometry>::SharedPtr odom_pub_;
   rclcpp::Publisher<std_msgs::msg::Empty>::SharedPtr clean_btn_pub_;
@@ -137,7 +137,7 @@ private:
   void undockCallback(std_msgs::msg::Empty::UniquePtr msg);
   void defineSongCallback(create_msgs::msg::DefineSong::UniquePtr msg);
   void playSongCallback(create_msgs::msg::PlaySong::UniquePtr msg);
-  void cmdVacuumCallback(std_msgs::msg::Float32::UniquePtr msg);
+  void cmdVacuumCallback(create_msgs::msg::MotorSetPoint::UniquePtr msg);
 
   bool update();
   void updateBatteryDiagnostics(diagnostic_updater::DiagnosticStatusWrapper& stat);

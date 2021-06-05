@@ -281,9 +281,9 @@ void CreateDriver::playSongCallback(create_msgs::msg::PlaySong::UniquePtr msg)
   }
 }
 
-void CreateDriver::cmdVacuumCallback(std_msgs::msg::Float32::UniquePtr msg)
+void CreateDriver::cmdVacuumCallback(create_msgs::msg::MotorSetPoint::UniquePtr msg)
 {
-  if (!robot_->setVacuumMotor(msg->data))
+  if (!robot_->setVacuumMotor(msg->duty_cycle))
   {
     RCLCPP_ERROR_STREAM(get_logger(), "[CREATE] Failed to set vacuum power");
   }
