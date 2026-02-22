@@ -19,11 +19,17 @@ joy_teleop:
           offset: 0.0
     dock:
       type: topic
-      interface_type: "std_msgs/msg/Empty"
+      interface_type: "std_msgs/msg/Bool"
       topic_name: dock
       deadman_buttons: [3, 7]  # RT + Y
+      message_value:
+        data:
+          value: true
     undock:
       type: topic
-      interface_type: "std_msgs/msg/Empty"
+      interface_type: "std_msgs/msg/Bool"
       topic_name: undock
       deadman_buttons: [1, 7]  # RT + A
+      message_value:
+        data:
+          value: true

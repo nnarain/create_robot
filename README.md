@@ -203,8 +203,8 @@ Topic       | Description   | Type
 `check_led`  | Enable / disable the 'check robot` LED | [std_msgs/msg/Bool][bool]
 `power_led`  | Set the 'power' LED color and intensity. Accepts 1 or 2 bytes, the first represents the color between green (0) and red (255) and the second (optional) represents the intensity with brightest setting as default (255) | [std_msgs/msg/UInt8MultiArray][uint8multiarray]
 `set_ascii` | Sets the 4 digit LEDs. Accepts 1 to 4 bytes, each representing an ASCII character to be displayed from left to right | [std_msgs/msg/UInt8MultiArray][uint8multiarray]
-`dock` | Activates the demo docking behaviour. Robot enters _Passive_ mode meaning the user loses control (See [OI Spec][oi_spec]) | [std_msgs/msg/Empty][empty]
-`undock` | Switches robot to _Full_ mode giving control back to the user | [std_msgs/msg/Empty][empty]
+`dock` | Activates the demo docking behaviour. Robot enters _Passive_ mode meaning the user loses control (See [OI Spec][oi_spec]) | [std_msgs/msg/Bool][bool]
+`undock` | Switches robot to _Full_ mode giving control back to the user | [std_msgs/msg/Bool][bool]
 `define_song` | Define a song with up to 16 notes. Each note is described by a MIDI note number and a float32 duration in seconds. The longest duration is 255/64 seconds. You can define up to 4 songs (See [OI Spec][oi_spec]) | [create_msgs/msg/DefineSong][definesong_msg]
 `play_song` | Play a predefined song | [create_msgs/msg/PlaySong][playsong_msg]
 

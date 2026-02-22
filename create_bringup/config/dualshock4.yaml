@@ -34,10 +34,16 @@
     dock:
       type: topic
       topic_name: dock
-      interface_type: std_msgs/msg/Empty
+      interface_type: std_msgs/msg/Bool
       deadman_buttons: [8] # Share Button
+      message_value:
+        data:
+          value: true
     undock:
       type: topic
       topic_name: undock
-      interface_type: std_msgs/msg/Empty
+      interface_type: std_msgs/msg/Bool
       deadman_buttons: [9] # Option Button
+      message_value:
+        data:
+          value: true

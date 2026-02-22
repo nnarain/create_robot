@@ -74,8 +74,8 @@ private:
   rclcpp::Subscription<std_msgs::msg::Bool>::SharedPtr check_led_sub_;
   rclcpp::Subscription<std_msgs::msg::UInt8MultiArray>::SharedPtr power_led_sub_;
   rclcpp::Subscription<std_msgs::msg::UInt8MultiArray>::SharedPtr set_ascii_sub_;
-  rclcpp::Subscription<std_msgs::msg::Empty>::SharedPtr dock_sub_;
-  rclcpp::Subscription<std_msgs::msg::Empty>::SharedPtr undock_sub_;
+  rclcpp::Subscription<std_msgs::msg::Bool>::SharedPtr dock_sub_;
+  rclcpp::Subscription<std_msgs::msg::Bool>::SharedPtr undock_sub_;
   rclcpp::Subscription<create_msgs::msg::DefineSong>::SharedPtr define_song_sub_;
   rclcpp::Subscription<create_msgs::msg::PlaySong>::SharedPtr play_song_sub_;
   rclcpp::Subscription<create_msgs::msg::MotorSetpoint>::SharedPtr side_brush_motor_sub_;
@@ -140,8 +140,8 @@ private:
   void checkLEDCallback(std_msgs::msg::Bool::UniquePtr msg);
   void powerLEDCallback(std_msgs::msg::UInt8MultiArray::UniquePtr msg);
   void setASCIICallback(std_msgs::msg::UInt8MultiArray::UniquePtr msg);
-  void dockCallback(std_msgs::msg::Empty::UniquePtr msg);
-  void undockCallback(std_msgs::msg::Empty::UniquePtr msg);
+  void dockCallback(std_msgs::msg::Bool::UniquePtr msg);
+  void undockCallback(std_msgs::msg::Bool::UniquePtr msg);
   void defineSongCallback(create_msgs::msg::DefineSong::UniquePtr msg);
   void playSongCallback(create_msgs::msg::PlaySong::UniquePtr msg);
   void sideBrushMotor(create_msgs::msg::MotorSetpoint::UniquePtr msg);

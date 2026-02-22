@@ -128,9 +128,9 @@ CreateDriver::CreateDriver()
     "power_led", 10, std::bind(&CreateDriver::powerLEDCallback, this, std::placeholders::_1));
   set_ascii_sub_ = create_subscription<std_msgs::msg::UInt8MultiArray>(
     "set_ascii", 10, std::bind(&CreateDriver::setASCIICallback, this, std::placeholders::_1));
-  dock_sub_ = create_subscription<std_msgs::msg::Empty>(
+  dock_sub_ = create_subscription<std_msgs::msg::Bool>(
     "dock", 10, std::bind(&CreateDriver::dockCallback, this, std::placeholders::_1));
-  undock_sub_ = create_subscription<std_msgs::msg::Empty>(
+  undock_sub_ = create_subscription<std_msgs::msg::Bool>(
     "undock", 10, std::bind(&CreateDriver::undockCallback, this, std::placeholders::_1));
   define_song_sub_ = create_subscription<create_msgs::msg::DefineSong>(
     "define_song", 10, std::bind(&CreateDriver::defineSongCallback, this, std::placeholders::_1));
@@ -250,7 +250,7 @@ void CreateDriver::setASCIICallback(std_msgs::msg::UInt8MultiArray::UniquePtr ms
   }
 }
 
-void CreateDriver::dockCallback(std_msgs::msg::Empty::UniquePtr msg)
+void CreateDriver::dockCallback(std_msgs::msg::Bool::UniquePtr msg)
 {
   (void) msg;
 
@@ -264,7 +264,7 @@ void CreateDriver::dockCallback(std_msgs::msg::Empty::UniquePtr msg)
   robot_->dock();
 }
 
-void CreateDriver::undockCallback(std_msgs::msg::Empty::UniquePtr msg)
+void CreateDriver::undockCallback(std_msgs::msg::Bool::UniquePtr msg)
 {
   (void) msg;
 
