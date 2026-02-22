@@ -36,10 +36,8 @@
       topic_name: dock
       interface_type: std_msgs/msg/Empty
       deadman_buttons: [8] # Share Button
-      message_value: []
     undock:
       type: topic
       topic_name: undock
       interface_type: std_msgs/msg/Empty
       deadman_buttons: [9] # Option Button
-      message_value: []
