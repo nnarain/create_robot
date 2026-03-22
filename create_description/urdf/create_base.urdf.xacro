@@ -37,6 +37,12 @@
     <xacro:include filename="$(find create_description)/urdf/create_base_gazebo.urdf.xacro" />
 
     <link name="base_footprint">
+    <inertial>
+      <origin xyz="0 0 0" />
+      <mass value="0.001" />
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001" />
+    </inertial>
+
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
