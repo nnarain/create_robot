@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA version="1.4.1" xmlns="http://www.collada.org/2005/11/COLLADASchema">
+  <asset>
+    <created>2024-01-01</created>
+    <modified>2024-01-01</modified>
+    <unit meter="1.0" name="meter"/>
+    <up_axis>Z_UP</up_axis>
+  </asset>
+  <library_effects>
+    <effect id="rplidar-effect">
+      <profile_COMMON>
+        <technique sid="common">
+          <phong>
+            <diffuse>
+              <color>0.2 0.2 0.2 1</color>
+            </diffuse>
+            <specular>
+              <color>0.5 0.5 0.5 1</color>
+            </specular>
+          </phong>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_materials>
+    <material id="rplidar-material" name="rplidar">
+      <instance_effect url="#rplidar-effect"/>
+    </material>
+  </library_materials>
+  <library_geometries>
+    <geometry id="rplidar-mesh" name="rplidar_a1m8">
+      <mesh>
+        <source id="rplidar-positions">
+          <float_array id="rplidar-positions-array" count="96">0.049000 0.000000 0.060000 0.045270 0.018751 0.060000 0.034648 0.034648 0.060000 0.018751 0.045270 0.060000 0.000000 0.049000 0.060000 -0.018751 0.045270 0.060000 -0.034648 0.034648 0.060000 -0.045270 0.018751 0.060000 -0.049000 0.000000 0.060000 -0.045270 -0.018751 0.060000 -0.034648 -0.034648 0.060000 -0.018751 -0.045270 0.060000 -0.000000 -0.049000 0.060000 0.018751 -0.045270 0.060000 0.034648 -0.034648 0.060000 0.045270 -0.018751 0.060000 0.049000 0.000000 0.000000 0.045270 0.018751 0.000000 0.034648 0.034648 0.000000 0.018751 0.045270 0.000000 0.000000 0.049000 0.000000 -0.018751 0.045270 0.000000 -0.034648 0.034648 0.000000 -0.045270 0.018751 0.000000 -0.049000 0.000000 0.000000 -0.045270 -0.018751 0.000000 -0.034648 -0.034648 0.000000 -0.018751 -0.045270 0.000000 -0.000000 -0.049000 0.000000 0.018751 -0.045270 0.000000 0.034648 -0.034648 0.000000 0.045270 -0.018751 0.000000</float_array>
+          <technique_common>
+            <accessor source="#rplidar-positions-array" count="32" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="rplidar-normals">
+          <float_array id="rplidar-normals-array" count="54">0.980785 0.195090 0.000000 0.831470 0.555570 0.000000 0.555570 0.831470 0.000000 0.195090 0.980785 0.000000 -0.195090 0.980785 0.000000 -0.555570 0.831470 0.000000 -0.831470 0.555570 0.000000 -0.980785 0.195090 0.000000 -0.980785 -0.195090 0.000000 -0.831470 -0.555570 0.000000 -0.555570 -0.831470 0.000000 -0.195090 -0.980785 0.000000 0.195090 -0.980785 0.000000 0.555570 -0.831470 0.000000 0.831470 -0.555570 0.000000 0.980785 -0.195090 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 -1.000000</float_array>
+          <technique_common>
+            <accessor source="#rplidar-normals-array" count="18" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="rplidar-vertices">
+          <input semantic="POSITION" source="#rplidar-positions"/>
+        </vertices>
+        <triangles count="60" material="rplidar-material">
+          <input semantic="VERTEX" source="#rplidar-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#rplidar-normals" offset="1"/>
+          <p>0 0 1 0 17 0
+          0 0 17 0 16 0
+          1 1 2 1 18 1
+          1 1 18 1 17 1
+          2 2 3 2 19 2
+          2 2 19 2 18 2
+          3 3 4 3 20 3
+          3 3 20 3 19 3
+          4 4 5 4 21 4
+          4 4 21 4 20 4
+          5 5 6 5 22 5
+          5 5 22 5 21 5
+          6 6 7 6 23 6
+          6 6 23 6 22 6
+          7 7 8 7 24 7
+          7 7 24 7 23 7
+          8 8 9 8 25 8
+          8 8 25 8 24 8
+          9 9 10 9 26 9
+          9 9 26 9 25 9
+          10 10 11 10 27 10
+          10 10 27 10 26 10
+          11 11 12 11 28 11
+          11 11 28 11 27 11
+          12 12 13 12 29 12
+          12 12 29 12 28 12
+          13 13 14 13 30 13
+          13 13 30 13 29 13
+          14 14 15 14 31 14
+          14 14 31 14 30 14
+          15 15 0 15 16 15
+          15 15 16 15 31 15
+          0 16 1 16 2 16
+          0 16 2 16 3 16
+          0 16 3 16 4 16
+          0 16 4 16 5 16
+          0 16 5 16 6 16
+          0 16 6 16 7 16
+          0 16 7 16 8 16
+          0 16 8 16 9 16
+          0 16 9 16 10 16
+          0 16 10 16 11 16
+          0 16 11 16 12 16
+          0 16 12 16 13 16
+          0 16 13 16 14 16
+          0 16 14 16 15 16
+          16 17 18 17 17 17
+          16 17 19 17 18 17
+          16 17 20 17 19 17
+          16 17 21 17 20 17
+          16 17 22 17 21 17
+          16 17 23 17 22 17
+          16 17 24 17 23 17
+          16 17 25 17 24 17
+          16 17 26 17 25 17
+          16 17 27 17 26 17
+          16 17 28 17 27 17
+          16 17 29 17 28 17
+          16 17 30 17 29 17
+          16 17 31 17 30 17</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="rplidar_a1m8" name="rplidar_a1m8" type="NODE">
+        <instance_geometry url="#rplidar-mesh">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="rplidar-material" target="#rplidar-material"/>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#Scene"/>
+  </scene>
+</COLLADA>

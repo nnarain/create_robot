@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>genbu_description</name>
+  <version>0.1.0</version>
+  <description>Robot URDF description for the Genbu robot (Create 2 base with RPLidar A1M8)</description>
+
+  <maintainer email="maintainer@example.com">Maintainer</maintainer>
+
+  <license>BSD</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <exec_depend>create_description</exec_depend>
+  <exec_depend>launch_xml</exec_depend>
+  <exec_depend>robot_state_publisher</exec_depend>
+  <exec_depend>urdf</exec_depend>
+  <exec_depend>xacro</exec_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

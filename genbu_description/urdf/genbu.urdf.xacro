@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<robot name="genbu" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:include filename="$(find create_description)/urdf/create_base.urdf.xacro" />
+  <xacro:include filename="$(find create_description)/urdf/create_2_gazebo.urdf.xacro" />
+
+  <xacro:create_base wheel_separation="0.235" base_diameter="0.3485">
+    <mesh filename="package://create_description/meshes/create_2.dae" />
+  </xacro:create_base>
+
+  <!-- RPLidar A1M8 sensor -->
+  <link name="rplidar_base_link">
+    <inertial>
+      <mass value="0.17" />
+      <origin xyz="0 0 0.03" />
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001" />
+    </inertial>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://genbu_description/meshes/rplidar_a1m8.dae" />
+      </geometry>
+    </visual>
+
+    <collision>
+      <origin xyz="0 0 0.03" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="0.049" length="0.060" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="rplidar_base_joint" type="fixed">
+    <origin xyz="0.0 0.0 0.0926" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="rplidar_base_link" />
+  </joint>
+</robot>
