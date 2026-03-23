@@ -36,28 +36,14 @@
   <xacro:macro name="create_base" params="diffdrive_update_rate:=40 wheel_separation wheel_radius:=0.036 wheel_width:=0.024 wheel_torque:=1.0 wheel_accel:=1.8 mass_kg:=3.5 base_diameter *mesh">
     <xacro:include filename="$(find create_description)/urdf/create_base_gazebo.urdf.xacro" />
 
-    <link name="base_footprint">
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <geometry>
-        <box size="0.001 0.001 0.001" />
-      </geometry>
-      <material name="Green" />
-    </visual>
-
-    <collision>
-      <origin xyz="0 0 0.017" rpy="0 0 0" />
-      <geometry>
-        <box size="0.001 0.001 0.001" />
-      </geometry>
-    </collision>
-    </link>
+    <link name="base_footprint" />
 
     <link name="base_link">
     <inertial>
       <mass value="2" />
       <origin xyz="0 0 0.0" />
-      <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.5" />
+      <!-- <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.5" /> -->
+      <inertia ixx="0.02" ixy="0.0" ixz="0.0" iyy="0.02" iyz="0.0" izz="0.04" />
     </inertial>
 
     <visual>
@@ -75,7 +61,7 @@
     </collision>
     </link>
 
-    <link name="wall_sensor_link">
+    <!-- <link name="wall_sensor_link">
     <inertial>
       <mass value="0.01" />
       <origin xyz="0 0 0" />
@@ -113,7 +99,7 @@
       <origin xyz="0 0 0" />
       <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001" />
     </inertial>
-    </link>
+    </link> -->
 
     <joint name="base_footprint_joint" type="fixed">
       <origin xyz="0 0 0.017" rpy="0 0 0" />
@@ -121,7 +107,7 @@
       <child link="base_link" />
     </joint>
 
-    <joint name="base_wall_sensor_joint" type="fixed">
+    <!-- <joint name="base_wall_sensor_joint" type="fixed">
       <origin xyz="0.09 -0.120 0.042" rpy="0 0 -1.0" />
       <parent link="base_link" />
       <child link="wall_sensor_link" />
@@ -149,7 +135,7 @@
       <origin xyz="0.15 -0.04 0.01" rpy="0 ${PI/2} 0" />
       <parent link="base_link" />
       <child link="rightfront_cliff_sensor_link" />
-    </joint>
+    </joint> -->
 
     <xacro:create_wheel prefix="left" y_offset="${wheel_separation / 2}" wheel_radius="${wheel_radius}" wheel_width="${wheel_width}"/>
     <xacro:create_wheel prefix="right" y_offset="${wheel_separation / -2}" wheel_radius="${wheel_radius}" wheel_width="${wheel_width}"/>
@@ -229,8 +215,8 @@
 
     <!-- Simulation sensors -->
     <xacro:sim_create_base/>
-    <xacro:sim_create_wall_sensor/>
+    <!-- <xacro:sim_create_wall_sensor/>
     <xacro:sim_create_cliff_sensors/>
-    <xacro:sim_imu/>
+    <xacro:sim_imu/> -->
   </xacro:macro>
 </robot>
