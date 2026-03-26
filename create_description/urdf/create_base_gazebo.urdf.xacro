@@ -2,7 +2,7 @@
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
   <xacro:macro name="sim_create_base">
     <gazebo>
-      <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
+      <!-- <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
         <alwaysOn>true</alwaysOn>
         <updateRate>${diffdrive_update_rate}</updateRate>
         <leftJoint>left_wheel_joint</leftJoint>
@@ -10,7 +10,6 @@
         <wheelSeparation>${wheel_separation}</wheelSeparation>
         <wheelDiameter>${wheel_radius * 2}</wheelDiameter>
         <wheelTorque>${wheel_torque}</wheelTorque>
-        <!--wheelAcceleration>${wheel_accel}</wheelAcceleration-->
         <commandTopic>cmd_vel</commandTopic>
         <odometryTopic>odom</odometryTopic>
         <odometryFrame>odom</odometryFrame>
@@ -26,7 +25,16 @@
         <frameName>map</frameName>
         <xyzOffsets>0 0 0</xyzOffsets>
         <rpyOffsets>0 0 0</rpyOffsets>
-        <!--<interface:position name="p3d_base_position"/>-->
+      </plugin> -->
+      <plugin
+          filename="gz-sim-diff-drive-system"
+          name="gz::sim::systems::DiffDrive">
+          <left_joint>left_wheel_joint</left_joint>
+          <right_joint>right_wheel_joint</right_joint>
+          <wheel_separation>0.235</wheel_separation>
+          <wheel_radius>0.036</wheel_radius>
+          <odom_publish_frequency>1</odom_publish_frequency>
+          <topic>cmd_vel</topic>
       </plugin>
     </gazebo>
 
