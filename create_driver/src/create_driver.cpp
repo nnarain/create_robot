@@ -404,6 +404,7 @@ void CreateDriver::updateSerialDiagnostics(diagnostic_updater::DiagnosticStatusW
     stat.summary(diagnostic_msgs::msg::DiagnosticStatus::OK, "Serial connection is good");
   }
 
+  stat.add("Serial port", dev_);
   stat.add("Corrupt packets", corrupt_packets);
   stat.add("Total packets", total_packets);
 }
