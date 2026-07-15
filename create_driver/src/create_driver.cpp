@@ -41,7 +41,8 @@ CreateDriver::CreateDriver()
   diagnostics_(this),
   last_cmd_vel_time_(0),
   is_running_slowly_(false),
-  latch_duration_(std::chrono::nanoseconds{0})
+  latch_duration_(std::chrono::nanoseconds{0}),
+  robot_connected_(false)
 {
   dev_ = declare_parameter<std::string>("dev", "/dev/ttyUSB0");
   base_frame_ = declare_parameter<std::string>("base_frame", "base_footprint");
@@ -75,21 +76,11 @@ CreateDriver::CreateDriver()
   // https://github.com/AutonomyLab/create_robot/issues/64
   robot_->setModeReportWorkaround(oi_mode_workaround_);
 
-  if (!robot_->connect(dev_, baud_)) {
-    RCLCPP_FATAL(get_logger(), "[CREATE] Failed to establish serial connection with Create.");
-    rclcpp::shutdown();
+  if (!tryConnectRobot()) {
+    RCLCPP_WARN(get_logger(), "[CREATE] Failed to establish serial connection with Create. Will keep retrying.");
+  } else {
+    initializeRobot();
   }
-
-  RCLCPP_INFO(this->get_logger(), "[CREATE] Connection established.");
-
-  // Start in full control mode
-  robot_->setMode(create::MODE_FULL);
-
-  // Show robot's battery level
-  RCLCPP_INFO(
-    get_logger(),
-    "[CREATE] Battery level %.2f %%",
-    (robot_->getBatteryCharge() / robot_->getBatteryCapacity()) * 100.0);
 
   // Set frame_id's
   mode_msg_.header.frame_id = base_frame_;
@@ -187,6 +178,35 @@ CreateDriver::~CreateDriver()
   RCLCPP_INFO(get_logger(), "[CREATE] Destruct sequence initiated.");
   robot_->disconnect();
   delete robot_;
+}
+
+bool CreateDriver::tryConnectRobot()
+{
+  if (robot_->connected()) {
+    robot_connected_ = true;
+    return true;
+  }
+
+  if (!robot_->connect(dev_, baud_)) {
+    robot_connected_ = false;
+    return false;
+  }
+
+  robot_connected_ = true;
+  RCLCPP_INFO(this->get_logger(), "[CREATE] Connection established.");
+  return true;
+}
+
+void CreateDriver::initializeRobot()
+{
+  // Start in full control mode after a successful connection.
+  robot_->setMode(create::MODE_FULL);
+
+  // Show robot's battery level.
+  RCLCPP_INFO(
+    get_logger(),
+    "[CREATE] Battery level %.2f %%",
+    (robot_->getBatteryCharge() / robot_->getBatteryCapacity()) * 100.0);
 }
 
 void CreateDriver::cmdVelCallback(geometry_msgs::msg::Twist::UniquePtr msg)
@@ -330,6 +350,11 @@ bool CreateDriver::update()
 
 void CreateDriver::updateBatteryDiagnostics(diagnostic_updater::DiagnosticStatusWrapper& stat)
 {
+  if (!robot_->connected()) {
+    stat.summary(diagnostic_msgs::msg::DiagnosticStatus::ERROR, "Base is not connected");
+    return;
+  }
+
   const float charge = robot_->getBatteryCharge();
   const float capacity = robot_->getBatteryCapacity();
   const create::ChargingState charging_state = robot_->getChargingState();
@@ -375,6 +400,11 @@ void CreateDriver::updateBatteryDiagnostics(diagnostic_updater::DiagnosticStatus
 
 void CreateDriver::updateSafetyDiagnostics(diagnostic_updater::DiagnosticStatusWrapper& stat)
 {
+  if (!robot_->connected()) {
+    stat.summary(diagnostic_msgs::msg::DiagnosticStatus::ERROR, "Base is not connected");
+    return;
+  }
+
   const bool is_wheeldrop = robot_->isWheeldrop();
   const bool is_cliff = robot_->isCliff();
   if (is_wheeldrop) {
@@ -411,6 +441,11 @@ void CreateDriver::updateSerialDiagnostics(diagnostic_updater::DiagnosticStatusW
 
 void CreateDriver::updateModeDiagnostics(diagnostic_updater::DiagnosticStatusWrapper& stat)
 {
+  if (!robot_->connected()) {
+    stat.summary(diagnostic_msgs::msg::DiagnosticStatus::ERROR, "Base is not connected");
+    return;
+  }
+
   const create::CreateMode mode = robot_->getMode();
   switch (mode) {
     case create::MODE_UNAVAILABLE:
@@ -433,6 +468,11 @@ void CreateDriver::updateModeDiagnostics(diagnostic_updater::DiagnosticStatusWra
 
 void CreateDriver::updateDriverDiagnostics(diagnostic_updater::DiagnosticStatusWrapper& stat)
 {
+  if (!robot_->connected()) {
+    stat.summary(diagnostic_msgs::msg::DiagnosticStatus::ERROR, "Base is not connected");
+    return;
+  }
+
   if (is_running_slowly_) {
     stat.summary(diagnostic_msgs::msg::DiagnosticStatus::WARN, "Internal loop running slowly");
   } else {
@@ -646,6 +686,16 @@ void CreateDriver::publishCliff()
 void CreateDriver::spinOnce()
 {
   const auto spin_start = now();
+  const bool was_connected = robot_connected_;
+
+  if (!tryConnectRobot()) {
+    diagnostics_.force_update();
+    return;
+  }
+
+  if (!was_connected) {
+    initializeRobot();
+  }
 
   update();
   diagnostics_.force_update();
